@@ -112,6 +112,17 @@ public class ConversationUIService {
     private TopicDetail topicDetailsParcelable;
     private Contact contact;
     private NotificationManager notificationManager;
+    MobiComQuickConversationFragment mobiComQuickConversationFragment;
+
+    public ConversationUIService(FragmentActivity fragmentActivity, MobiComQuickConversationFragment mobiComQuickConversationFragment) {
+        this.mobiComQuickConversationFragment = mobiComQuickConversationFragment;
+
+        this.fragmentActivity = fragmentActivity;
+        this.baseContactService = new AppContactService(fragmentActivity);
+        this.userPreference = MobiComUserPreference.getInstance(fragmentActivity);
+        this.notificationManager  = (NotificationManager) fragmentActivity.getSystemService(Context.NOTIFICATION_SERVICE);
+        this.fileClientService = new FileClientService(fragmentActivity);
+    }
 
     public ConversationUIService(FragmentActivity fragmentActivity) {
         this.fragmentActivity = fragmentActivity;
@@ -122,14 +133,7 @@ public class ConversationUIService {
     }
 
     public MobiComQuickConversationFragment getQuickConversationFragment() {
-
-        MobiComQuickConversationFragment quickConversationFragment = (MobiComQuickConversationFragment) UIService.getFragmentByTag(fragmentActivity, QUICK_CONVERSATION_FRAGMENT);
-
-        if (quickConversationFragment == null) {
-            quickConversationFragment = new MobiComQuickConversationFragment();
-            ConversationActivity.addFragment(fragmentActivity, quickConversationFragment, QUICK_CONVERSATION_FRAGMENT);
-        }
-        return quickConversationFragment;
+        return mobiComQuickConversationFragment;
     }
 
     public ConversationFragment getConversationFragment() {
@@ -419,12 +423,11 @@ public class ConversationUIService {
                 return;
             }
 
-            MobiComQuickConversationFragment fragment = (MobiComQuickConversationFragment) UIService.getFragmentByTag(fragmentActivity, QUICK_CONVERSATION_FRAGMENT);
-            if (fragment != null) {
-                if (message.isHidden()) {
-                    fragment.refreshView();
-                } else {
-                    fragment.addMessage(message);
+            if (mobiComQuickConversationFragment != null) {
+                if(message.isHidden()){
+                    mobiComQuickConversationFragment.refreshView();
+                }else {
+                    mobiComQuickConversationFragment.addMessage(message);
                 }
             }
         }
