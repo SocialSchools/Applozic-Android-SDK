@@ -487,8 +487,17 @@ public class AlCustomizationSettings extends JsonMarker {
         return themeColorPrimary;
     }
 
+    public void setThemeColorPrimary(String themeColorPrimary) {
+        this.themeColorPrimary = themeColorPrimary;
+    }
+
+
     public String getThemeColorPrimaryDark() {
         return themeColorPrimaryDark;
+    }
+
+    public void setThemeColorPrimaryDark(String themeColorPrimaryDark) {
+        this.themeColorPrimaryDark = themeColorPrimaryDark;
     }
 
     public String getEditTextHintText() {
