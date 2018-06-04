@@ -146,6 +146,8 @@ public class MobiComQuickConversationFragment extends Fragment implements Search
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext());
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(recyclerAdapter);
+
+        //recyclerView.setAdapter(recyclerAdapter);
         //recyclerView.addItemDecoration(new FooterItemDecoration(getContext(), recyclerView, R.layout.mobicom_message_list_header_footer));
 //        toolbar = (Toolbar) getActivity().findViewById(R.id.my_toolbar);
 //        toolbar.setClickable(false);
@@ -548,7 +550,7 @@ public class MobiComQuickConversationFragment extends Fragment implements Search
         super.onActivityCreated(savedInstanceState);
 
         //FlurryAgent.logEvent(QUICK_CONVERSATION_EVENT);
-        //listView.setAdapter(conversationAdapter);
+        //recyclerView.setAdapter(recyclerAdapter);
         // startNewButton.setOnClickListener(startNewConversation());
         fabButton.setOnClickListener(startNewConversation());
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

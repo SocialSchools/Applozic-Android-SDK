@@ -116,7 +116,6 @@ public class ConversationUIService {
 
     public ConversationUIService(FragmentActivity fragmentActivity, MobiComQuickConversationFragment mobiComQuickConversationFragment) {
         this.mobiComQuickConversationFragment = mobiComQuickConversationFragment;
-
         this.fragmentActivity = fragmentActivity;
         this.baseContactService = new AppContactService(fragmentActivity);
         this.userPreference = MobiComUserPreference.getInstance(fragmentActivity);
@@ -504,7 +503,7 @@ public class ConversationUIService {
     }
 
     public void updateLastSeenStatus(String contactId) {
-        if (BroadcastService.isQuick()) {
+        if (BroadcastService.isQuick() && getQuickConversationFragment() != null) {
             getQuickConversationFragment().updateLastSeenStatus(contactId);
             return;
         }
@@ -651,7 +650,7 @@ public class ConversationUIService {
         if (!BroadcastService.isIndividual()) {
             notificationManager.cancel(currentId.hashCode());
         }
-        if (BroadcastService.isQuick()) {
+        if (BroadcastService.isQuick() && getQuickConversationFragment() != null) {
             getQuickConversationFragment().updateConversationRead(currentId, isGroup);
         }
     }
