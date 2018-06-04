@@ -156,9 +156,12 @@ public class AlCustomizationSettings extends JsonMarker {
         return customMessageBackgroundColor;
     }
 
-
     public String getSentMessageBackgroundColor() {
         return sentMessageBackgroundColor;
+    }
+
+    public void setSentMessageBackgroundColor(String sentMessageBackgroundColor) {
+        this.sentMessageBackgroundColor = sentMessageBackgroundColor;
     }
 
     public String getReceivedMessageBackgroundColor() {
@@ -175,6 +178,10 @@ public class AlCustomizationSettings extends JsonMarker {
 
     public String getSendButtonBackgroundColor() {
         return sendButtonBackgroundColor;
+    }
+
+    public void setSendButtonBackgroundColor(String sendButtonBackgroundColor) {
+        this.sendButtonBackgroundColor = sendButtonBackgroundColor;
     }
 
     public boolean isStartNewGroup() {
