@@ -1,6 +1,11 @@
 package com.applozic.mobicomkit.uiwidgets;
 
+import android.content.Context;
+import android.text.TextUtils;
+
 import com.applozic.mobicomkit.uiwidgets.conversation.MobicomMessageTemplate;
+import com.applozic.mobicommons.file.FileUtils;
+import com.applozic.mobicommons.json.GsonUtils;
 import com.applozic.mobicommons.json.JsonMarker;
 
 import java.util.Map;
@@ -108,6 +113,28 @@ public class AlCustomizationSettings extends JsonMarker {
     private boolean launchChatFromProfilePicOrName;
 
     private Map<String, Boolean> attachmentOptions;
+
+
+    private static AlCustomizationSettings instance;
+
+    private AlCustomizationSettings() {
+
+    }
+
+    public static AlCustomizationSettings getInstance(Context context) {
+        if (instance == null) {
+            String jsonString = FileUtils.loadSettingsJsonFile(context);
+            if (!TextUtils.isEmpty(jsonString)) {
+                instance = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
+            } else {
+                instance = new AlCustomizationSettings();
+            }
+        }
+
+        return instance;
+    }
+
+
 
     public boolean isBroadcastOption() {
         return broadcastOption;

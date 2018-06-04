@@ -284,12 +284,9 @@ abstract public class MobiComConversationFragment extends Fragment implements Vi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String jsonString = FileUtils.loadSettingsJsonFile(getActivity().getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        alCustomizationSettings = AlCustomizationSettings.getInstance(getActivity().getApplicationContext());
+
         applozicDocumentView = new ApplozicDocumentView(getContext());
         restrictedWords = FileUtils.loadRestrictedWordsFile(getContext());
         conversationUIService = new ConversationUIService(getActivity());
