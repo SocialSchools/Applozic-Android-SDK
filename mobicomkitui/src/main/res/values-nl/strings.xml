@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Applozic</string>
+    <string name="subtitle_last_seen_at_time">Laatst gezien</string>
+    <string name="user_name">Gebruikersnaam</string>
+    <string name="forward">Doorsturen</string>
+    <string name="today">Vandaag</string>
+    <string name="you_string">Jij</string>
+    <string name="no_conversation">Je hebt geen gesprekken</string>
+    <string name="enter_mt_message_hint">Schrijf een bericht...</string>
+    <string name="enter_message_hint">Schrijf een bericht...</string>
+    <string name="empty_conversations">Geen gesprekken</string>
+    <string name="search_not_found_for_messages">Geen gesprek gevonden</string>
+    <string name="internet_connection_not_available">Geen internet verbinding</string>
+    <string name="reply">Antwoorden</string>
+    <string name="is_typing">is aan het typen...</string>
+    <string name="ok_alert">OK</string>
+    <string name="name">Naam</string>
+    <string name="resend">Opnieuw verzenden</string>
+    <string name="messageOptions">Berichtopties</string>
+    <string name="refresh">Vernieuwen</string>
+</resources>
