@@ -496,6 +496,14 @@ public class AlCustomizationSettings extends JsonMarker {
 
     public void setThemeColorPrimary(String themeColorPrimary) {
         this.themeColorPrimary = themeColorPrimary;
+        this.adminTextColor = themeColorPrimary;
+
+        this.collapsingToolbarLayoutColor = themeColorPrimary;
+        this.sendButtonBackgroundColor = themeColorPrimary;
+        this.attachmentIconsBackgroundColor = themeColorPrimary;
+
+        this.customMessageBackgroundColor = themeColorPrimary;
+        this.sentMessageBackgroundColor = themeColorPrimary;
     }
 
 
@@ -505,6 +513,8 @@ public class AlCustomizationSettings extends JsonMarker {
 
     public void setThemeColorPrimaryDark(String themeColorPrimaryDark) {
         this.themeColorPrimaryDark = themeColorPrimaryDark;
+        this.sentMessageBorderColor = themeColorPrimaryDark;
+        this.adminBorderColor = themeColorPrimaryDark;
     }
 
     public String getEditTextHintText() {
