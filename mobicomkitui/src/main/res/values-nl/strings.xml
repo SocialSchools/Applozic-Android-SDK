@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Applozic</string>
     <string name="subtitle_last_seen_at_time">Laatst gezien</string>
     <string name="user_name">Gebruikersnaam</string>
     <string name="forward">Doorsturen</string>

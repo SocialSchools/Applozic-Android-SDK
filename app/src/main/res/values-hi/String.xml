@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources  xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
-    <string name="app_name">Applozic</string>
     <string name="mobicomkit_label">Applozic</string>
     <string name="title_activity_main">मुख्य गतिविधि</string>
     <string name="title_section1">अनुभाग </string>
