@@ -13,6 +13,7 @@ import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 
 import com.applozic.mobicomkit.ApplozicClient;
+import com.applozic.mobicomkit.R;
 import com.applozic.mobicomkit.api.HttpRequestUtils;
 import com.applozic.mobicomkit.api.MobiComKitClientService;
 import com.applozic.mobicomkit.api.MobiComKitConstants;
@@ -319,7 +320,7 @@ public class RegisterUserClientService extends MobiComKitClientService {
     @RequiresApi(api = Build.VERSION_CODES.O)
     void createNotificationChannel(Context context) {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        CharSequence name = MobiComKitConstants.PUSH_NOTIFICATION_NAME;
+        CharSequence name = context.getString(R.string.al_notificationchannel_name);
         int importance = NotificationManager.IMPORTANCE_HIGH;
         if (mNotificationManager.getNotificationChannel(MobiComKitConstants.AL_PUSH_NOTIFICATION) == null) {
             NotificationChannel mChannel = new NotificationChannel(MobiComKitConstants.AL_PUSH_NOTIFICATION, name, importance);
