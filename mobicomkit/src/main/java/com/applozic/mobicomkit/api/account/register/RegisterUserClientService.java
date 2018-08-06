@@ -322,26 +322,24 @@ public class RegisterUserClientService extends MobiComKitClientService {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         CharSequence name = context.getString(R.string.al_notificationchannel_name);
         int importance = NotificationManager.IMPORTANCE_HIGH;
-        if (mNotificationManager.getNotificationChannel(MobiComKitConstants.AL_PUSH_NOTIFICATION) == null) {
-            NotificationChannel mChannel = new NotificationChannel(MobiComKitConstants.AL_PUSH_NOTIFICATION, name, importance);
-            mChannel.enableLights(true);
-            mChannel.setLightColor(Color.GREEN);
-            if (ApplozicClient.getInstance(context).isUnreadCountBadgeEnabled()) {
-                mChannel.setShowBadge(true);
-            } else {
-                mChannel.setShowBadge(false);
-            }
-            if (ApplozicClient.getInstance(context).getVibrationOnNotification()) {
-                mChannel.enableVibration(true);
-                mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-            }
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE).build();
-            mChannel.setSound(TextUtils.isEmpty(MobiComUserPreference.getInstance(context).getNotificationSoundFilePath()) ? RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION) : Uri.parse(MobiComUserPreference.getInstance(context).getNotificationSoundFilePath()), audioAttributes);
-            mNotificationManager.createNotificationChannel(mChannel);
 
+        NotificationChannel mChannel = new NotificationChannel(MobiComKitConstants.AL_PUSH_NOTIFICATION, name, importance);
+        mChannel.enableLights(true);
+        mChannel.setLightColor(Color.GREEN);
+        if (ApplozicClient.getInstance(context).isUnreadCountBadgeEnabled()) {
+            mChannel.setShowBadge(true);
+        } else {
+            mChannel.setShowBadge(false);
         }
+        if (ApplozicClient.getInstance(context).getVibrationOnNotification()) {
+            mChannel.enableVibration(true);
+            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+        }
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE).build();
+        mChannel.setSound(TextUtils.isEmpty(MobiComUserPreference.getInstance(context).getNotificationSoundFilePath()) ? RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION) : Uri.parse(MobiComUserPreference.getInstance(context).getNotificationSoundFilePath()), audioAttributes);
+        mNotificationManager.createNotificationChannel(mChannel);
 
     }
 
