@@ -1,7 +1,7 @@
 package com.applozic.mobicomkit.uiwidgets.attachmentview;
 
 import android.media.MediaRecorder;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 import android.widget.Toast;
 
 import com.applozic.mobicomkit.uiwidgets.R;

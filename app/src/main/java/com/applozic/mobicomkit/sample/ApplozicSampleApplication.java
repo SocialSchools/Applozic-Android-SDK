@@ -1,8 +1,8 @@
 package com.applozic.mobicomkit.sample;
 
 import android.content.Context;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 

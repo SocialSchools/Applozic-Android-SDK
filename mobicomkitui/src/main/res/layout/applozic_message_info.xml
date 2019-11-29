@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/applozic_message_info_read_header_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -158,9 +158,9 @@
                     android:layout_gravity="end"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/applozic_ic_action_message_read" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/applozic_message_info_read_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
                 android:layout_marginStart="10dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/applozic_message_info_read_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                     android:layout_marginStart="10dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
         <!-- List View for  delivered-->
@@ -193,7 +193,7 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/applozic_message_info_delivered_header_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -219,9 +219,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:src="@drawable/applozic_ic_action_message_delivered" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/applozic_message_info_delivered_list_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -235,14 +235,14 @@
                 app:cardCornerRadius="0dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/applozic_message_info_delivered_list_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scrollbars="vertical"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>
