@@ -11,14 +11,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.ListFragment;
-import androidx.loader.app.LoaderManager;
-import androidx.core.content.ContextCompat;
-import androidx.loader.content.Loader;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.cursoradapter.widget.CursorAdapter;
-import androidx.appcompat.widget.AppCompatCheckBox;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
@@ -38,6 +30,15 @@ import android.widget.Button;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.core.content.ContextCompat;
+import androidx.cursoradapter.widget.CursorAdapter;
+import androidx.fragment.app.ListFragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.applozic.mobicomkit.Applozic;
 import com.applozic.mobicomkit.ApplozicClient;
@@ -67,8 +68,6 @@ import com.applozic.mobicomkit.uiwidgets.conversation.activity.ContactSelectionA
 import com.applozic.mobicomkit.uiwidgets.conversation.activity.ConversationActivity;
 import com.applozic.mobicommons.commons.core.utils.Utils;
 import com.applozic.mobicommons.commons.image.ImageLoader;
-import com.applozic.mobicommons.file.FileUtils;
-import com.applozic.mobicommons.json.GsonUtils;
 import com.applozic.mobicommons.people.SearchListFragment;
 import com.applozic.mobicommons.people.channel.Channel;
 import com.applozic.mobicommons.people.contact.Contact;
@@ -124,12 +123,9 @@ public class ContactSelectionFragment extends ListFragment implements SearchList
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bundle = getArguments();
-        String jsonString = FileUtils.loadSettingsJsonFile(getActivity().getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        alCustomizationSettings = AlCustomizationSettings.getInstance(getActivity().getApplicationContext());
+
         userPreference = MobiComUserPreference.getInstance(getActivity());
         if (bundle != null) {
             channel = (Channel) bundle.getSerializable(CHANNEL_OBJECT);

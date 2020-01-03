@@ -14,17 +14,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.core.content.FileProvider;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
@@ -34,6 +23,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.applozic.mobicomkit.api.MobiComKitConstants;
 import com.applozic.mobicomkit.api.account.user.MobiComUserPreference;
@@ -50,9 +50,8 @@ import com.applozic.mobicomkit.uiwidgets.people.fragment.ProfileFragment;
 import com.applozic.mobicomkit.uiwidgets.uilistener.MobicomkitUriListener;
 import com.applozic.mobicommons.commons.core.utils.PermissionsUtils;
 import com.applozic.mobicommons.commons.core.utils.Utils;
-import com.applozic.mobicommons.file.FileUtils;
-import com.applozic.mobicommons.json.GsonUtils;
 import com.applozic.mobicommons.people.channel.Channel;
+import com.google.android.material.snackbar.Snackbar;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -99,12 +98,9 @@ public class ChannelCreateActivity extends AppCompatActivity implements Activity
         setContentView(R.layout.channel_create_activty_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-        String jsonString = FileUtils.loadSettingsJsonFile(getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+
         connectivityReceiver = new ConnectivityReceiver();
         userPreference = MobiComUserPreference.getInstance(ChannelCreateActivity.this);
         mActionBar = getSupportActionBar();

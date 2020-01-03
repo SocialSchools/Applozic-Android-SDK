@@ -3,8 +3,9 @@ package com.applozic.mobicomkit.uiwidgets.conversation;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import androidx.fragment.app.FragmentActivity;
 import android.text.TextUtils;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.applozic.mobicomkit.ApplozicClient;
 import com.applozic.mobicomkit.api.MobiComKitConstants;
@@ -31,6 +32,12 @@ public class MobiComKitBroadcastReceiver extends BroadcastReceiver {
 
     public MobiComKitBroadcastReceiver(FragmentActivity fragmentActivity) {
         this.conversationUIService = new ConversationUIService(fragmentActivity);
+        this.baseContactService = new AppContactService(fragmentActivity);
+        this.hideActionMessages = ApplozicClient.getInstance(fragmentActivity).isActionMessagesHidden();
+    }
+
+    public MobiComKitBroadcastReceiver(FragmentActivity fragmentActivity, ConversationUIService conversationUIService) {
+        this.conversationUIService = conversationUIService;
         this.baseContactService = new AppContactService(fragmentActivity);
         this.hideActionMessages = ApplozicClient.getInstance(fragmentActivity).isActionMessagesHidden();
     }
@@ -112,7 +119,7 @@ public class MobiComKitBroadcastReceiver extends BroadcastReceiver {
             conversationUIService.updateLastSeenStatus(intent.getStringExtra("contactId"));
         } else if (BroadcastService.INTENT_ACTIONS.MQTT_DISCONNECTED.toString().equals(action)) {
             conversationUIService.reconnectMQTT();
-        }else if(BroadcastService.INTENT_ACTIONS.MQTT_CONNECTED.toString().equals(action)){
+        } else if (BroadcastService.INTENT_ACTIONS.MQTT_CONNECTED.toString().equals(action)) {
             conversationUIService.onMqttConnected();
         } else if (BroadcastService.INTENT_ACTIONS.CHANNEL_SYNC.toString().equals(action)) {
             boolean isMetaDataUpdate = intent.getBooleanExtra("isMetadataUpdate", false);

@@ -15,17 +15,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.core.content.FileProvider;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +22,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.applozic.mobicomkit.api.MobiComKitConstants;
 import com.applozic.mobicomkit.api.attachment.FileClientService;
@@ -47,9 +47,9 @@ import com.applozic.mobicomkit.uiwidgets.people.fragment.ProfileFragment;
 import com.applozic.mobicomkit.uiwidgets.uilistener.MobicomkitUriListener;
 import com.applozic.mobicommons.commons.core.utils.PermissionsUtils;
 import com.applozic.mobicommons.commons.core.utils.Utils;
-import com.applozic.mobicommons.file.FileUtils;
 import com.applozic.mobicommons.json.GsonUtils;
 import com.applozic.mobicommons.people.channel.Channel;
+import com.google.android.material.snackbar.Snackbar;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -97,15 +97,11 @@ public class ChannelNameActivity extends AppCompatActivity implements ActivityCo
         mActionBar.setTitle(getString(R.string.update_channel_title_name));
         selectImageProfileIcon = (CircleImageView) findViewById(R.id.applozic_group_profile_camera);
         applozicGroupProfileIcon = (ImageView) findViewById(R.id.applozic_group_profile);
-        String jsonString = FileUtils.loadSettingsJsonFile(getApplicationContext());
         fileClientService = new FileClientService(this);
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
 
-        if(!TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimary()) && !TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimaryDark())){
+        alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+
+        if (!TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimary()) && !TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimaryDark())) {
             mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(alCustomizationSettings.getThemeColorPrimary())));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 getWindow().setStatusBarColor(Color.parseColor(alCustomizationSettings.getThemeColorPrimaryDark()));
@@ -123,7 +119,7 @@ public class ChannelNameActivity extends AppCompatActivity implements ActivityCo
             File file = new File(groupInfoUpdate.getLocalImagePath());
             Uri uri = Uri.parse(file.getAbsolutePath());
             if (uri != null) {
-                Utils.printLog(this,"ChannelNameActivity::", uri.toString());
+                Utils.printLog(this, "ChannelNameActivity::", uri.toString());
                 applozicGroupProfileIcon.setImageURI(uri);
             }
         } else {
@@ -221,7 +217,7 @@ public class ChannelNameActivity extends AppCompatActivity implements ActivityCo
                     fileClientService.writeFile(imageChangeUri, profilePhotoFile);
                 }
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Utils.printLog(this,ChannelNameActivity.class.getName(),this.getString(R.string.applozic_Cropping_failed)+result.getError());
+                Utils.printLog(this, ChannelNameActivity.class.getName(), this.getString(R.string.applozic_Cropping_failed) + result.getError());
             }
         }
         if (resultCode == Activity.RESULT_OK) {

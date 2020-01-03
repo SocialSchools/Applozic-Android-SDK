@@ -116,6 +116,17 @@ public class ConversationUIService {
     private Contact contact;
     private NotificationManager notificationManager;
     private boolean isActionMessageHidden;
+    private MobiComQuickConversationFragment mobiComQuickConversationFragment;
+
+    public ConversationUIService(FragmentActivity fragmentActivity,MobiComQuickConversationFragment mobiComQuickConversationFragment) {
+        this.mobiComQuickConversationFragment = mobiComQuickConversationFragment;
+        this.fragmentActivity = fragmentActivity;
+        this.baseContactService = new AppContactService(fragmentActivity);
+        this.userPreference = MobiComUserPreference.getInstance(fragmentActivity);
+        this.notificationManager = (NotificationManager) fragmentActivity.getSystemService(Context.NOTIFICATION_SERVICE);
+        this.fileClientService = new FileClientService(fragmentActivity);
+        isActionMessageHidden = ApplozicClient.getInstance(fragmentActivity).isActionMessagesHidden();
+    }
 
     public ConversationUIService(FragmentActivity fragmentActivity) {
         this.fragmentActivity = fragmentActivity;
@@ -127,14 +138,7 @@ public class ConversationUIService {
     }
 
     public MobiComQuickConversationFragment getQuickConversationFragment() {
-
-        MobiComQuickConversationFragment quickConversationFragment = (MobiComQuickConversationFragment) UIService.getFragmentByTag(fragmentActivity, QUICK_CONVERSATION_FRAGMENT);
-
-        if (quickConversationFragment == null) {
-            quickConversationFragment = new MobiComQuickConversationFragment();
-            ConversationActivity.addFragment(fragmentActivity, quickConversationFragment, QUICK_CONVERSATION_FRAGMENT);
-        }
-        return quickConversationFragment;
+        return mobiComQuickConversationFragment;
     }
 
     public ConversationFragment getConversationFragment() {
@@ -434,12 +438,11 @@ public class ConversationUIService {
                 return;
             }
 
-            MobiComQuickConversationFragment fragment = (MobiComQuickConversationFragment) UIService.getFragmentByTag(fragmentActivity, QUICK_CONVERSATION_FRAGMENT);
-            if (fragment != null) {
-                if (message.hasHideKey()) {
-                    fragment.refreshView();
-                } else {
-                    fragment.addMessage(message);
+            if (mobiComQuickConversationFragment != null) {
+                if(message.isHidden()){
+                    mobiComQuickConversationFragment.refreshView();
+                }else {
+                    mobiComQuickConversationFragment.addMessage(message);
                 }
             }
         }
@@ -723,13 +726,8 @@ public class ConversationUIService {
     }
 
     public void startContactActivityForResult(final Message message, final String messageContent) {
-        AlCustomizationSettings alCustomizationSettings;
-        String jsonString = FileUtils.loadSettingsJsonFile(fragmentActivity.getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+        AlCustomizationSettings    alCustomizationSettings = AlCustomizationSettings.getInstance(fragmentActivity);
+
         if (alCustomizationSettings.getTotalOnlineUsers() > 0 && Utils.isInternetAvailable(fragmentActivity)) {
             processLoadUsers(false, message, messageContent, alCustomizationSettings.getTotalRegisteredUserToFetch(), alCustomizationSettings.getTotalOnlineUsers());
         } else if (alCustomizationSettings.getTotalRegisteredUserToFetch() > 0 && (alCustomizationSettings.isRegisteredUserContactListCall() || ApplozicSetting.getInstance(fragmentActivity).isRegisteredUsersContactCall()) && !userPreference.getWasContactListServerCallAlreadyDone()) {

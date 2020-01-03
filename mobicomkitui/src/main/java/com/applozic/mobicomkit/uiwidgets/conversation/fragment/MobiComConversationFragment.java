@@ -23,23 +23,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.ResultReceiver;
 import android.os.Vibrator;
-
-import com.applozic.mobicomkit.api.conversation.AlMessageReportTask;
-import com.applozic.mobicomkit.listners.AlCallback;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.core.view.GestureDetectorCompat;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -73,6 +56,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.core.view.GestureDetectorCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.applozic.mobicomkit.Applozic;
 import com.applozic.mobicomkit.ApplozicClient;
 import com.applozic.mobicomkit.api.MobiComKitConstants;
@@ -82,6 +77,7 @@ import com.applozic.mobicomkit.api.account.user.UserBlockTask;
 import com.applozic.mobicomkit.api.attachment.AttachmentView;
 import com.applozic.mobicomkit.api.attachment.FileClientService;
 import com.applozic.mobicomkit.api.attachment.FileMeta;
+import com.applozic.mobicomkit.api.conversation.AlMessageReportTask;
 import com.applozic.mobicomkit.api.conversation.ApplozicMqttIntentService;
 import com.applozic.mobicomkit.api.conversation.Message;
 import com.applozic.mobicomkit.api.conversation.MessageClientService;
@@ -93,8 +89,8 @@ import com.applozic.mobicomkit.api.conversation.selfdestruct.DisappearingMessage
 import com.applozic.mobicomkit.api.conversation.service.ConversationService;
 import com.applozic.mobicomkit.api.notification.MuteNotificationAsync;
 import com.applozic.mobicomkit.api.notification.MuteNotificationRequest;
-import com.applozic.mobicomkit.api.notification.NotificationService;
 import com.applozic.mobicomkit.api.notification.MuteUserNotificationAsync;
+import com.applozic.mobicomkit.api.notification.NotificationService;
 import com.applozic.mobicomkit.api.people.UserIntentService;
 import com.applozic.mobicomkit.broadcast.BroadcastService;
 import com.applozic.mobicomkit.channel.database.ChannelDatabaseService;
@@ -104,6 +100,7 @@ import com.applozic.mobicomkit.contact.MobiComVCFParser;
 import com.applozic.mobicomkit.contact.VCFContactData;
 import com.applozic.mobicomkit.feed.ApiResponse;
 import com.applozic.mobicomkit.feed.TopicDetail;
+import com.applozic.mobicomkit.listners.AlCallback;
 import com.applozic.mobicomkit.uiwidgets.AlCustomizationSettings;
 import com.applozic.mobicomkit.uiwidgets.ApplozicSetting;
 import com.applozic.mobicomkit.uiwidgets.R;
@@ -156,6 +153,7 @@ import com.applozic.mobicommons.people.channel.ChannelUserMapper;
 import com.applozic.mobicommons.people.channel.ChannelUtils;
 import com.applozic.mobicommons.people.channel.Conversation;
 import com.applozic.mobicommons.people.contact.Contact;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -309,12 +307,9 @@ abstract public class MobiComConversationFragment extends Fragment implements Vi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         geoApiKey = Utils.getMetaDataValue(ApplozicService.getContext(getContext()), ConversationActivity.GOOGLE_API_KEY_META_DATA);
-        String jsonString = FileUtils.loadSettingsJsonFile(ApplozicService.getContext(getContext()));
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
+
         restrictedWords = FileUtils.loadRestrictedWordsFile(getContext());
         conversationUIService = new ConversationUIService(getActivity());
         syncCallService = SyncCallService.getInstance(getActivity());
