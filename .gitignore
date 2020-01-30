@@ -5,3 +5,15 @@
 .DS_Store
 /build
 /.nb-gradle/
+# IntelliJ
+#This will avoid the unnecessary files getting added to repo
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
+.idea/*
+output.json 

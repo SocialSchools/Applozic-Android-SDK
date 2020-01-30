@@ -1,6 +1,11 @@
 package com.applozic.mobicomkit.uiwidgets;
 
+import android.content.Context;
+import android.text.TextUtils;
+
 import com.applozic.mobicomkit.uiwidgets.conversation.MobicomMessageTemplate;
+import com.applozic.mobicommons.file.FileUtils;
+import com.applozic.mobicommons.json.GsonUtils;
 import com.applozic.mobicommons.json.JsonMarker;
 
 import java.util.Map;
@@ -123,6 +128,26 @@ public class AlCustomizationSettings extends JsonMarker {
 
     private Map<String, Boolean> filterGallery;
 
+    private static AlCustomizationSettings instance;
+
+    private AlCustomizationSettings() {
+
+    }
+
+    public static AlCustomizationSettings getInstance(Context context) {
+        if (instance == null) {
+            String jsonString = FileUtils.loadSettingsJsonFile(context);
+            if (!TextUtils.isEmpty(jsonString)) {
+                instance = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
+            } else {
+                instance = new AlCustomizationSettings();
+            }
+        }
+
+        return instance;
+    }
+
+
     public boolean isBroadcastOption() {
         return broadcastOption;
     }
@@ -148,6 +173,10 @@ public class AlCustomizationSettings extends JsonMarker {
         return sentMessageBackgroundColor;
     }
 
+    public void setSentMessageBackgroundColor(String sentMessageBackgroundColor) {
+        this.sentMessageBackgroundColor = sentMessageBackgroundColor;
+    }
+
     public String getReceivedMessageBackgroundColor() {
         return receivedMessageBackgroundColor;
     }
@@ -162,6 +191,10 @@ public class AlCustomizationSettings extends JsonMarker {
 
     public String getSendButtonBackgroundColor() {
         return sendButtonBackgroundColor;
+    }
+
+    public void setSendButtonBackgroundColor(String sendButtonBackgroundColor) {
+        this.sendButtonBackgroundColor = sendButtonBackgroundColor;
     }
 
     public boolean isStartNewGroup() {
@@ -474,8 +507,26 @@ public class AlCustomizationSettings extends JsonMarker {
         return themeColorPrimary;
     }
 
+    public void setThemeColorPrimary(String themeColorPrimary) {
+        this.themeColorPrimary = themeColorPrimary;
+        this.adminTextColor = themeColorPrimary;
+
+        this.collapsingToolbarLayoutColor = themeColorPrimary;
+        this.sendButtonBackgroundColor = themeColorPrimary;
+        this.attachmentIconsBackgroundColor = themeColorPrimary;
+
+        this.customMessageBackgroundColor = themeColorPrimary;
+        this.sentMessageBackgroundColor = themeColorPrimary;
+    }
+
     public String getThemeColorPrimaryDark() {
         return themeColorPrimaryDark;
+    }
+
+    public void setThemeColorPrimaryDark(String themeColorPrimaryDark) {
+        this.themeColorPrimaryDark = themeColorPrimaryDark;
+        this.sentMessageBorderColor = themeColorPrimaryDark;
+        this.adminBorderColor = themeColorPrimaryDark;
     }
 
     public String getEditTextHintText() {
