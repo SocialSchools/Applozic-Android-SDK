@@ -99,13 +99,9 @@ public class ChannelNameActivity extends AppCompatActivity implements ActivityCo
         mActionBar.setTitle(getString(R.string.update_channel_title_name));
         selectImageProfileIcon = (CircleImageView) findViewById(R.id.applozic_group_profile_camera);
         applozicGroupProfileIcon = (ImageView) findViewById(R.id.applozic_group_profile);
-        String jsonString = FileUtils.loadSettingsJsonFile(getApplicationContext());
         fileClientService = new FileClientService(this);
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
 
         if(!TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimary()) && !TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimaryDark())){
             mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(alCustomizationSettings.getThemeColorPrimary())));

@@ -119,12 +119,9 @@ public class ContactSelectionFragment extends ListFragment implements SearchList
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bundle = getArguments();
-        String jsonString = FileUtils.loadSettingsJsonFile(getActivity().getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
+
         userPreference = MobiComUserPreference.getInstance(getActivity());
         if (bundle != null) {
             channel = (Channel) bundle.getSerializable(CHANNEL_OBJECT);

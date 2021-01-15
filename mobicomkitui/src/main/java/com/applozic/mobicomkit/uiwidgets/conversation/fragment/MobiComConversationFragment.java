@@ -301,12 +301,8 @@ abstract public class MobiComConversationFragment extends Fragment implements Vi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         geoApiKey = Applozic.getInstance(getContext()).getGeoApiKey();
-        String jsonString = FileUtils.loadSettingsJsonFile(ApplozicService.getContext(getContext()));
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
 
         richMessageActionProcessor = new RichMessageActionProcessor(this);
 

@@ -101,12 +101,9 @@ public class ChannelCreateActivity extends AppCompatActivity implements Activity
         setContentView(R.layout.channel_create_activty_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-        String jsonString = FileUtils.loadSettingsJsonFile(getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+
         connectivityReceiver = new ConnectivityReceiver();
         userPreference = MobiComUserPreference.getInstance(ChannelCreateActivity.this);
         mActionBar = getSupportActionBar();

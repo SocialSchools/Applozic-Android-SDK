@@ -90,13 +90,9 @@ public class ContactSelectionActivity extends AppCompatActivity implements Searc
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         mActionBar = getSupportActionBar();
-        String jsonString = FileUtils.loadSettingsJsonFile(getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson
-                    (jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+
         if (!TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimary()) && !TextUtils
                 .isEmpty(alCustomizationSettings.getThemeColorPrimaryDark())) {
             mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor

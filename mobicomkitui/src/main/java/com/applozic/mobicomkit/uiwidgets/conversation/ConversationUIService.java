@@ -705,13 +705,7 @@ public class ConversationUIService {
     }
 
     public void startContactActivityForResult(final Message message, final String messageContent) {
-        AlCustomizationSettings alCustomizationSettings;
-        String jsonString = FileUtils.loadSettingsJsonFile(fragmentActivity.getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(fragmentActivity);
         if (alCustomizationSettings.getTotalOnlineUsers() > 0 && Utils.isInternetAvailable(fragmentActivity)) {
             processLoadUsers(false, message, messageContent, alCustomizationSettings.getTotalRegisteredUserToFetch(), alCustomizationSettings.getTotalOnlineUsers());
         } else if (alCustomizationSettings.getTotalRegisteredUserToFetch() > 0 && (alCustomizationSettings.isRegisteredUserContactListCall() || ApplozicSetting.getInstance(fragmentActivity).isRegisteredUsersContactCall())) {

@@ -116,12 +116,8 @@ public class MobiComKitPeopleActivity extends AppCompatActivity implements OnCon
             finish();
         }
         setContentView(R.layout.people_activity);
-        String jsonString = FileUtils.loadSettingsJsonFile(getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
 
         onContactsInteractionListener = this;
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);

@@ -93,12 +93,9 @@ public class MobiComQuickConversationFragment extends Fragment implements Search
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String jsonString = FileUtils.loadSettingsJsonFile(ApplozicService.getContext(getContext()));
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
+
         syncCallService = SyncCallService.getInstance(getActivity());
         conversationUIService = new ConversationUIService(getActivity());
         baseContactService = new AppContactService(getActivity());

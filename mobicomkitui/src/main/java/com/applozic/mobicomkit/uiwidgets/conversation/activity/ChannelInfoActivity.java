@@ -128,12 +128,9 @@ public class ChannelInfoActivity extends AppCompatActivity {
         setContentView(R.layout.channel_info_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        String jsonString = FileUtils.loadSettingsJsonFile(getApplicationContext());
-        if (!TextUtils.isEmpty(jsonString)) {
-            alCustomizationSettings = (AlCustomizationSettings) GsonUtils.getObjectFromJson(jsonString, AlCustomizationSettings.class);
-        } else {
-            alCustomizationSettings = new AlCustomizationSettings();
-        }
+
+        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+
         refreshBroadcast = new RefreshBroadcast();
         baseContactService = new AppContactService(getApplicationContext());
         channelImage = (ImageView) findViewById(R.id.channelImage);
