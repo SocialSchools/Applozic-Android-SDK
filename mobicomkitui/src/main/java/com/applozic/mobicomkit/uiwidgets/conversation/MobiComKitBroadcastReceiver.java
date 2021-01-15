@@ -37,6 +37,12 @@ public class MobiComKitBroadcastReceiver extends BroadcastReceiver {
         this.hideActionMessages = ApplozicClient.getInstance(fragmentActivity).isActionMessagesHidden();
     }
 
+    public MobiComKitBroadcastReceiver(FragmentActivity fragmentActivity, ConversationUIService conversationUIService) {
+        this.conversationUIService = conversationUIService;
+        this.baseContactService = new AppContactService(fragmentActivity);
+        this.hideActionMessages = ApplozicClient.getInstance(fragmentActivity).isActionMessagesHidden();
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();

@@ -435,9 +435,6 @@ public class ConversationActivity extends AppCompatActivity implements MessageCo
                     }
                     addFragment(this, conversation, ConversationUIService.CONVERSATION_FRAGMENT);
                 }
-            } else {
-                setSearchListFragment(quickConversationFragment);
-                addFragment(this, quickConversationFragment, ConversationUIService.QUICK_CONVERSATION_FRAGMENT);
             }
         }
         mobiComKitBroadcastReceiver = new MobiComKitBroadcastReceiver(this);

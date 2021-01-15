@@ -124,15 +124,20 @@ public class ConversationUIService {
         isActionMessageHidden = ApplozicClient.getInstance(fragmentActivity).isActionMessagesHidden();
     }
 
+    MobiComQuickConversationFragment mobiComQuickConversationFragment;
+
+    public ConversationUIService(FragmentActivity fragmentActivity, MobiComQuickConversationFragment mobiComQuickConversationFragment) {
+        this.mobiComQuickConversationFragment = mobiComQuickConversationFragment;
+        this.fragmentActivity = fragmentActivity;
+        this.baseContactService = new AppContactService(fragmentActivity);
+        this.userPreference = MobiComUserPreference.getInstance(fragmentActivity);
+        this.notificationManager  = (NotificationManager) fragmentActivity.getSystemService(Context.NOTIFICATION_SERVICE);
+        this.fileClientService = new FileClientService(fragmentActivity);
+        isActionMessageHidden = ApplozicClient.getInstance(fragmentActivity).isActionMessagesHidden();
+    }
+
     public MobiComQuickConversationFragment getQuickConversationFragment() {
-
-        MobiComQuickConversationFragment quickConversationFragment = (MobiComQuickConversationFragment) UIService.getFragmentByTag(fragmentActivity, QUICK_CONVERSATION_FRAGMENT);
-
-        if (quickConversationFragment == null) {
-            quickConversationFragment = new MobiComQuickConversationFragment();
-            ConversationActivity.addFragment(fragmentActivity, quickConversationFragment, QUICK_CONVERSATION_FRAGMENT);
-        }
-        return quickConversationFragment;
+        return mobiComQuickConversationFragment;
     }
 
     public ConversationFragment getConversationFragment() {
@@ -409,13 +414,11 @@ public class ConversationUIService {
             if (!BroadcastService.isQuick()) {
                 return;
             }
-
-            MobiComQuickConversationFragment fragment = (MobiComQuickConversationFragment) UIService.getFragmentByTag(fragmentActivity, QUICK_CONVERSATION_FRAGMENT);
-            if (fragment != null) {
+            if (mobiComQuickConversationFragment != null) {
                 if (message.hasHideKey()) {
-                    fragment.refreshView();
+                    mobiComQuickConversationFragment.refreshView();
                 } else {
-                    fragment.addMessage(message);
+                    mobiComQuickConversationFragment.addMessage(message);
                 }
             }
         }
