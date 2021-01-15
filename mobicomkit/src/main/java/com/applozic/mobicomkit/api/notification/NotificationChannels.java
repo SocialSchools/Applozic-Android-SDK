@@ -13,6 +13,7 @@ import android.text.TextUtils;
 
 import com.applozic.mobicomkit.Applozic;
 import com.applozic.mobicomkit.ApplozicClient;
+import com.applozic.mobicomkit.R;
 import com.applozic.mobicomkit.api.MobiComKitConstants;
 import com.applozic.mobicomkit.exception.ApplozicException;
 import com.applozic.mobicommons.commons.core.utils.Utils;
@@ -32,7 +33,10 @@ public class NotificationChannels {
     private String soundFilePath;
     private String TAG = getClass().getSimpleName();
 
+    private String name = "";
+
     public NotificationChannels(Context context, String soundFilePath) {
+        this.name = context.getString(R.string.al_notificationchannel_name);
         this.context = context;
         this.soundFilePath = soundFilePath;
         this.mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -95,7 +99,6 @@ public class NotificationChannels {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private synchronized void createNotificationChannel() {
-        CharSequence name = MobiComKitConstants.PUSH_NOTIFICATION_NAME;
         int importance = NotificationManager.IMPORTANCE_HIGH;
 
         if (mNotificationManager != null && mNotificationManager.getNotificationChannel(MobiComKitConstants.AL_PUSH_NOTIFICATION) == null) {
@@ -120,7 +123,6 @@ public class NotificationChannels {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private synchronized void createAppNotificationChannel() throws ApplozicException {
-        CharSequence name = MobiComKitConstants.APP_NOTIFICATION_NAME;
         int importance = NotificationManager.IMPORTANCE_HIGH;
 
         if (mNotificationManager != null && mNotificationManager.getNotificationChannel(MobiComKitConstants.AL_APP_NOTIFICATION) == null) {
@@ -150,7 +152,6 @@ public class NotificationChannels {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private synchronized void createSilentNotificationChannel() {
-        CharSequence name = MobiComKitConstants.SILENT_PUSH_NOTIFICATION;
         int importance = NotificationManager.IMPORTANCE_LOW;
         if (mNotificationManager != null && mNotificationManager.getNotificationChannel(MobiComKitConstants.AL_SILENT_NOTIFICATION) == null) {
             NotificationChannel mChannel = new NotificationChannel(MobiComKitConstants.AL_SILENT_NOTIFICATION, name, importance);
