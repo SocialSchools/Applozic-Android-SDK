@@ -101,7 +101,7 @@ public class ChannelNameActivity extends AppCompatActivity implements ActivityCo
         applozicGroupProfileIcon = (ImageView) findViewById(R.id.applozic_group_profile);
         fileClientService = new FileClientService(this);
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+        alCustomizationSettings = AlCustomizationSettings.getInstance(this);
 
         if(!TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimary()) && !TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimaryDark())){
             mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(alCustomizationSettings.getThemeColorPrimary())));

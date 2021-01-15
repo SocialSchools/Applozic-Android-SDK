@@ -129,7 +129,7 @@ public class ChannelInfoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+        alCustomizationSettings = AlCustomizationSettings.getInstance(this);
 
         refreshBroadcast = new RefreshBroadcast();
         baseContactService = new AppContactService(getApplicationContext());

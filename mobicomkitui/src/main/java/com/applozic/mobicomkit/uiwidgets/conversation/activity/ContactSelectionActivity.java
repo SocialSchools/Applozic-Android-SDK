@@ -91,7 +91,7 @@ public class ContactSelectionActivity extends AppCompatActivity implements Searc
         setSupportActionBar(toolbar);
         mActionBar = getSupportActionBar();
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+        alCustomizationSettings = AlCustomizationSettings.getInstance(this);
 
         if (!TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimary()) && !TextUtils
                 .isEmpty(alCustomizationSettings.getThemeColorPrimaryDark())) {

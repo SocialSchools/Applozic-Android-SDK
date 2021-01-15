@@ -302,7 +302,7 @@ abstract public class MobiComConversationFragment extends Fragment implements Vi
         super.onCreate(savedInstanceState);
         geoApiKey = Applozic.getInstance(getContext()).getGeoApiKey();
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
+        alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
 
         richMessageActionProcessor = new RichMessageActionProcessor(this);
 

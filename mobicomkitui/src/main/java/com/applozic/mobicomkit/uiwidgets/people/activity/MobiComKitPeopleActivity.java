@@ -117,7 +117,7 @@ public class MobiComKitPeopleActivity extends AppCompatActivity implements OnCon
         }
         setContentView(R.layout.people_activity);
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+        alCustomizationSettings = AlCustomizationSettings.getInstance(this);
 
         onContactsInteractionListener = this;
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);

@@ -120,7 +120,7 @@ public class ContactSelectionFragment extends ListFragment implements SearchList
         super.onCreate(savedInstanceState);
         bundle = getArguments();
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
+        alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
 
         userPreference = MobiComUserPreference.getInstance(getActivity());
         if (bundle != null) {

@@ -114,7 +114,7 @@ public class MobiComAttachmentSelectorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mobicom_multi_attachment_activity);
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+        alCustomizationSettings = AlCustomizationSettings.getInstance(this);
 
         restrictedWords = FileUtils.loadRestrictedWordsFile(this);
         choosenOption = getFilterOptions();

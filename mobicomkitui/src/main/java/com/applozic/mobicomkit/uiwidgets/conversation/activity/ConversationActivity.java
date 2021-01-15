@@ -355,7 +355,7 @@ public class ConversationActivity extends AppCompatActivity implements MessageCo
         super.onCreate(savedInstanceState);
         ApplozicService.initWithContext(getApplication());
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+        alCustomizationSettings = AlCustomizationSettings.getInstance(this);
 
         if (!TextUtils.isEmpty(alCustomizationSettings.getChatBackgroundImageName())) {
             resourceId = getResources().getIdentifier(alCustomizationSettings.getChatBackgroundImageName(), "drawable", getPackageName());

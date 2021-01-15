@@ -94,7 +94,7 @@ public class MobiComQuickConversationFragment extends Fragment implements Search
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
+        alCustomizationSettings = AlCustomizationSettings.getInstance(getContext());
 
         syncCallService = SyncCallService.getInstance(getActivity());
         conversationUIService = new ConversationUIService(getActivity());

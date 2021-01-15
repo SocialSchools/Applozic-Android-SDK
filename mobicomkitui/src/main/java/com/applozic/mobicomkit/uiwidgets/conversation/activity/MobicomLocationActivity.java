@@ -77,7 +77,7 @@ public class MobicomLocationActivity extends AppCompatActivity implements OnMapR
         toolbar.setTitle(getResources().getString(R.string.send_location));
         setSupportActionBar(toolbar);
 
-        AlCustomizationSettings alCustomizationSettings = AlCustomizationSettings.getInstance(this);
+        alCustomizationSettings = AlCustomizationSettings.getInstance(this);
 
         if (!TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimary()) && !TextUtils.isEmpty(alCustomizationSettings.getThemeColorPrimaryDark())) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(alCustomizationSettings.getThemeColorPrimary())));
