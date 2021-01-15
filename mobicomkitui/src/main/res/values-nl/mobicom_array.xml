@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu">
+        <item>Kopiëren</item>
+        <item>Doorsturen</item>
+        <item>Opnieuw verzenden</item>
+        <item>Verwijderen</item>
+        <item>Verwijderen voor iedereen</item>
+        <item>Info</item>
+        <item>Delen</item>
+        <item>Antwoorden</item>
+    </string-array>
+</resources>
